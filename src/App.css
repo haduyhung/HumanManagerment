@@ -1,6 +1,9 @@
 .App {
   text-align: center;
 }
+.html {
+  height: 100% !important;
+}
 .Container{
   text-align: center;
 }

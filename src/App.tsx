@@ -6,7 +6,6 @@ function App() {
   return (
     <div className="App">
       <div className="Container">
-        <div>Alo 123!</div>
         <AppRoutes />
       </div>
     </div>
