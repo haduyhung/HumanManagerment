@@ -5,60 +5,15 @@ import ListWrapper from "./styled";
 import { Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
 
-const List = (props: { users: Array<User> }) => {
-  const { users } = props;
-
-  const columns: ColumnsType<User> = [
-    {
-      title: "ID",
-      dataIndex: "_id",
-      key: "_id",
-      render: (text) => <div>{text}</div>,
-    },
-    {
-      title: "Username",
-      dataIndex: "username",
-      key: "username",
-      render: (text) => <div>{text}</div>,
-    },
-    {
-      title: "Email",
-      dataIndex: "email",
-      key: "email",
-      render: (text) => <div>{text}</div>,
-    },
-    {
-      title: "Gender",
-      dataIndex: "gender",
-      key: "gender",
-      render: (text) => <div>{text}</div>,
-    },
-    {
-      title: "Phone number",
-      dataIndex: "phoneNumber",
-      key: "phoneNumber",
-      render: (text) => <div>{text}</div>,
-    },
-    {
-      title: "Role",
-      dataIndex: "role",
-      key: "role",
-    },
-    {
-      title: "Created at",
-      dataIndex: "createdAt",
-      key: "createdAt",
-    },
-    {
-      title: "Updated at",
-      dataIndex: "updatedAt",
-      key: "updatedAt",
-    },
-  ];
+const List = (props: {
+  data: Array<Company | User>;
+  columns: ColumnsType<Company> | ColumnsType<User>;
+}) => {
+  const { data, columns } = props;
 
   return (
     <ListWrapper style={{ maxWidth: "1600px" }}>
-      <Table columns={columns} dataSource={users} />
+      <Table dataSource={data} columns={columns} />
     </ListWrapper>
   );
 };
