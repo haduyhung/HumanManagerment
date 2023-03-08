@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter, RouteObject, useRoutes } from "react-router-dom";
+import CompanyPage from "../features/company/pages";
+import UserPage from "../features/user/pages";
 import HomeLayout from "../layouts/HomeLayout";
-import CompanyPage from "../pages/CompanyPage";
-import UserPage from "../pages/UserPage";
 
 export const RouteRender = () => {
   const routesRoot: RouteObject[] = [

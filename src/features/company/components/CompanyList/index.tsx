@@ -1,13 +1,12 @@
 import { ColumnsType } from "antd/es/table";
 import React, { useEffect, useState } from "react";
-import List from "../../components/list";
-import { getCompany } from "../../sevices/company";
-import { Company } from "../../types";
+import List from "../../../../components/list";
+import { getCompany } from "../../../../sevices/company";
+import { Company } from "../../../../types";
 import CompanyPageWrapper from "./styled";
 
-const CompanyPage = () => {
+const CompanyList = () => {
   const [companies, setCompanies] = useState<Company[]>([]);
-  console.log("companies", companies);
 
   const columns: ColumnsType<Company> = [
     {
@@ -77,4 +76,4 @@ const CompanyPage = () => {
   );
 };
 
-export default CompanyPage;
+export default CompanyList;

@@ -1,13 +1,19 @@
 import { ColumnsType } from "antd/es/table";
 import React, { useEffect, useState } from "react";
-import List from "../../components/list";
-import { getUser } from "../../sevices/user";
-import { User } from "../../types/user.type";
-import UserPageWrapper from "./styled";
+import List from "../../../../components/list";
+import { User } from "../../../../types";
+import UserListWrapper from "./styled";
 
-const UserPage = () => {
-  const [users, setUsers] = useState<User[]>([]);
-  console.log("users", users);
+const UserList = (props: {
+  setShowForm: React.Dispatch<React.SetStateAction<boolean>>;
+  showForm: boolean;
+  users: User[];
+}) => {
+  const { setShowForm, showForm, users } = props;
+
+  const onEdit = (item: User) => {
+    setShowForm(true);
+  };
 
   const columns: ColumnsType<User> = [
     {
@@ -55,28 +61,27 @@ const UserPage = () => {
       dataIndex: "updatedAt",
       key: "updatedAt",
     },
+    {
+      key: "functions",
+      render: (text) => (
+        <>
+          <button style={{ marginRight: "10px" }} onClick={() => onEdit(text)}>
+            Edit
+          </button>
+          <button onClick={() => console.log("123123", text)}>Delete</button>
+        </>
+      ),
+    },
   ];
 
-  const callGetUser = async () => {
-    try {
-      const response = await getUser();
-      setUsers(response.data.data);
-      return response;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    callGetUser();
-  }, []);
-
   return (
-    <>
-      <UserPageWrapper>
-        <List {...{ data: users, columns: columns }} />
-      </UserPageWrapper>
-    </>
+    <UserListWrapper>
+      <List {...{ data: users, columns: columns, pagination: false }} />
+      <div onClick={() => setShowForm(!showForm)} className="button-add-user">
+        {!showForm ? "add new user" : "close form"}
+      </div>
+    </UserListWrapper>
   );
 };
 
-export default UserPage;
+export default UserList;

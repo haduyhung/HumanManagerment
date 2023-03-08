@@ -3,17 +3,18 @@ import { Company } from "../../types/company.type";
 import { User } from "../../types/user.type";
 import ListWrapper from "./styled";
 import { Table } from "antd";
-import type { ColumnsType } from "antd/es/table";
+import type { ColumnsType, TablePaginationConfig } from "antd/es/table";
 
 const List = (props: {
   data: Array<Company | User>;
-  columns: ColumnsType<Company> | ColumnsType<User>;
+  columns: ColumnsType<Company> | ColumnsType<User> | any;
+  pagination?: TablePaginationConfig | false;
 }) => {
-  const { data, columns } = props;
+  const { data, columns, pagination } = props;
 
   return (
     <ListWrapper style={{ maxWidth: "1600px" }}>
-      <Table dataSource={data} columns={columns} />
+      <Table dataSource={data} columns={columns} pagination={pagination} />
     </ListWrapper>
   );
 };
