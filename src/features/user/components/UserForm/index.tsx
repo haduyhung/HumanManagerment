@@ -1,39 +1,91 @@
-import { Input, InputNumber, Select } from "antd";
+import { Input, InputNumber, Modal, Select } from "antd";
 import React from "react";
+import { RequestUser } from "../../../../types";
 import UserFormWrapper from "./styled";
 
-const UserForm = () => {
+const UserForm = (
+  props: {
+    user: RequestUser;
+    setUser: React.Dispatch<React.SetStateAction<RequestUser>>;
+    onSubmit: (user: RequestUser, id?: string) => Promise<{} | undefined>;
+    showForm: boolean;
+    setShowForm: React.Dispatch<React.SetStateAction<boolean>>;
+  },
+  ref: React.MutableRefObject<undefined>
+) => {
+  const { user, setUser, onSubmit, showForm, setShowForm } = props;
+  console.log("ref", ref);
+
   return (
-    <UserFormWrapper>
-      <div className="field-item">
-        <div className="field-label">Username:</div>
-        <Input className="input-field" placeholder="Ng Van A" />
-      </div>
-      <div className="field-item">
-        <div className="field-label">Email:</div>
-        <Input className="input-field" placeholder="ngavana@gmail.com" />
-      </div>
-      <div className="field-item">
-        <div className="field-label">Gender:</div>
-        <Select
-          className="input-field"
-          defaultValue="Male"
-          options={[
-            { value: "Male", label: "Male" },
-            { value: "Female", label: "Female" },
-            { value: "Gay", label: "Gay" },
-          ]}
-        />
-      </div>
-      <div className="field-item">
-        <div className="field-label">Age:</div>
-        <InputNumber className="input-field" min={0} defaultValue={3} />
-      </div>
-      <div className="field-item">
-        <div className="field-label">Phone Number:</div>
-        <InputNumber className="input-field" placeholder="0123456789" />
-      </div>
-    </UserFormWrapper>
+    <Modal
+      title={user._id ? "Update an user" : "Create a new user"}
+      open={showForm}
+      onOk={() => onSubmit(user, user._id)}
+      okText={user._id ? "save" : "add"}
+      onCancel={() => setShowForm(false)}
+    >
+      <UserFormWrapper>
+        <div className="field-item">
+          <div className="field-label">Username:</div>
+          <Input
+            className="input-field"
+            placeholder="Ng Van A"
+            value={user?.username}
+            onChange={(value) =>
+              setUser({ ...user, username: value.target.value })
+            }
+          />
+        </div>
+        <div className="field-item">
+          <div className="field-label">Email:</div>
+          <Input
+            className="input-field"
+            placeholder="ngavana@gmail.com"
+            value={user?.email}
+            onChange={(value) =>
+              setUser({ ...user, email: value.target.value })
+            }
+          />
+        </div>
+        <div className="field-item">
+          <div className="field-label">Gender:</div>
+          <Select
+            className="input-field"
+            value={user.gender}
+            options={[
+              { value: "Male", label: "Male" },
+              { value: "Female", label: "Female" },
+              { value: "Gay", label: "Gay" },
+            ]}
+            onChange={(value) => {
+              setUser({ ...user, gender: value });
+            }}
+          />
+        </div>
+        <div className="field-item">
+          <div className="field-label">Age:</div>
+          <InputNumber
+            className="input-field"
+            min={0}
+            value={user.age}
+            onChange={(value) => {
+              setUser({ ...user, age: Number(value) });
+            }}
+          />
+        </div>
+        <div className="field-item">
+          <div className="field-label">Phone Number:</div>
+          <InputNumber
+            className="input-field"
+            placeholder="0123456789"
+            value={user.phoneNumber}
+            onChange={(value) =>
+              setUser({ ...user, phoneNumber: Number(value) })
+            }
+          />
+        </div>
+      </UserFormWrapper>
+    </Modal>
   );
 };
 

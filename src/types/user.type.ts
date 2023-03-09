@@ -12,3 +12,12 @@ export type User = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type RequestUser = {
+  _id?: string;
+  username: string;
+  email: string;
+  gender: string;
+  age: number;
+  phoneNumber: number;
+};

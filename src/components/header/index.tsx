@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 interface itemLinkMenu {
   title: string;
   onActionLink?: () => any;
+  function?: Function;
 }
 
 const Header = () => {
@@ -37,6 +38,7 @@ const Header = () => {
           );
         })}
       </div>
+      <div className="menu-functions">{}</div>
     </HeaderWrapper>
   );
 };

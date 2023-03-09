@@ -1,19 +1,19 @@
 import { ColumnsType } from "antd/es/table";
-import React, { useEffect, useState } from "react";
+import { AxiosResponse } from "axios";
+import React from "react";
 import List from "../../../../components/list";
-import { User } from "../../../../types";
+import { RequestUser, User } from "../../../../types";
 import UserListWrapper from "./styled";
 
 const UserList = (props: {
   setShowForm: React.Dispatch<React.SetStateAction<boolean>>;
   showForm: boolean;
+  onDelete: (id: string) => Promise<AxiosResponse<any, any> | undefined>;
   users: User[];
+  setUser: React.Dispatch<React.SetStateAction<RequestUser>>;
+  user: RequestUser;
 }) => {
-  const { setShowForm, showForm, users } = props;
-
-  const onEdit = (item: User) => {
-    setShowForm(true);
-  };
+  const { setShowForm, showForm, users, setUser, onDelete } = props;
 
   const columns: ColumnsType<User> = [
     {
@@ -41,6 +41,12 @@ const UserList = (props: {
       render: (text) => <div>{text}</div>,
     },
     {
+      title: "Age",
+      dataIndex: "age",
+      key: "age",
+      render: (text) => <div>{text}</div>,
+    },
+    {
       title: "Phone number",
       dataIndex: "phoneNumber",
       key: "phoneNumber",
@@ -65,10 +71,23 @@ const UserList = (props: {
       key: "functions",
       render: (text) => (
         <>
-          <button style={{ marginRight: "10px" }} onClick={() => onEdit(text)}>
+          <button
+            style={{ marginRight: "10px" }}
+            onClick={() => {
+              setShowForm(true);
+              setUser({
+                _id: text._id,
+                username: text.username,
+                email: text.email,
+                gender: text.gender,
+                age: text.age,
+                phoneNumber: text.phoneNumber,
+              });
+            }}
+          >
             Edit
           </button>
-          <button onClick={() => console.log("123123", text)}>Delete</button>
+          <button onClick={() => onDelete(text._id)}>Delete</button>
         </>
       ),
     },
@@ -77,9 +96,22 @@ const UserList = (props: {
   return (
     <UserListWrapper>
       <List {...{ data: users, columns: columns, pagination: false }} />
-      <div onClick={() => setShowForm(!showForm)} className="button-add-user">
+      <button
+        onClick={() => {
+          setShowForm(!showForm);
+          setUser({
+            _id: "",
+            username: "",
+            email: "",
+            gender: "",
+            age: 0,
+            phoneNumber: 0,
+          });
+        }}
+        className="button-add-user"
+      >
         {!showForm ? "add new user" : "close form"}
-      </div>
+      </button>
     </UserListWrapper>
   );
 };

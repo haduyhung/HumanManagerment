@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from "axios";
 import { instance } from "../libraries/axios";
-import { User } from "../types/user.type";
+import { RequestUser } from "../types/user.type";
 
 export const getUser = () => {
   const request: AxiosRequestConfig = {
@@ -10,7 +10,7 @@ export const getUser = () => {
   return instance(request);
 };
 
-export const postUploadUser = (data: User) => {
+export const postUploadUser = (data: RequestUser) => {
   const request: AxiosRequestConfig = {
     method: "POST",
     url: `api/test-user/create`,
@@ -19,7 +19,7 @@ export const postUploadUser = (data: User) => {
   return instance(request);
 };
 
-export const putUpdateUser = (data: User, id: string) => {
+export const putUpdateUser = (data: RequestUser, id: string) => {
   const request: AxiosRequestConfig = {
     method: "PUT",
     url: `api/test-user/update/${id}`,
