@@ -3,18 +3,15 @@ import React from "react";
 import { RequestUser } from "../../../../types";
 import UserFormWrapper from "./styled";
 
-const UserForm = (
-  props: {
-    user: RequestUser;
-    setUser: React.Dispatch<React.SetStateAction<RequestUser>>;
-    onSubmit: (user: RequestUser, id?: string) => Promise<{} | undefined>;
-    showForm: boolean;
-    setShowForm: React.Dispatch<React.SetStateAction<boolean>>;
-  },
-  ref: React.MutableRefObject<undefined>
-) => {
-  const { user, setUser, onSubmit, showForm, setShowForm } = props;
-  console.log("ref", ref);
+const UserForm = (props: {
+  user: RequestUser;
+  setUser: React.Dispatch<React.SetStateAction<RequestUser>>;
+  onSubmit: (user: RequestUser, id?: string) => Promise<{} | undefined>;
+  showForm: boolean;
+  setShowForm: React.Dispatch<React.SetStateAction<boolean>>;
+  ref: any;
+}) => {
+  const { user, setUser, onSubmit, showForm, setShowForm, ref } = props;
 
   return (
     <Modal
@@ -22,13 +19,24 @@ const UserForm = (
       open={showForm}
       onOk={() => onSubmit(user, user._id)}
       okText={user._id ? "save" : "add"}
-      onCancel={() => setShowForm(false)}
+      onCancel={() => {
+        setShowForm(false);
+        setUser({
+          _id: "",
+          username: "",
+          email: "",
+          gender: "",
+          age: 0,
+          phoneNumber: 0,
+        });
+      }}
     >
       <UserFormWrapper>
         <div className="field-item">
           <div className="field-label">Username:</div>
           <Input
             className="input-field"
+            ref={ref}
             placeholder="Ng Van A"
             value={user?.username}
             onChange={(value) =>

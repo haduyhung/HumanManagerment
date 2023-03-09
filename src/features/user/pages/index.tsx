@@ -1,21 +1,19 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
+import { Context } from "../../../layouts/HomeLayout";
 import {
   deleteUser,
   getUser,
   postUploadUser,
   putUpdateUser,
 } from "../../../sevices/user";
-import { RequestUser, User } from "../../../types";
+import { RequestUser } from "../../../types";
 import UserForm from "../components/UserForm";
 import UserList from "../components/UserList";
 import UserLayoutWrapper from "./styled";
 
 const UserPage = () => {
+  const { users, setUsers, showForm, setShowForm } = useContext(Context);
   const inputRef = useRef();
-  console.log("inputRef", inputRef);
-
-  const [showForm, setShowForm] = useState<boolean>(false);
-  const [users, setUsers] = useState<User[]>([]);
   const [reload, setReload] = useState<boolean>(false);
   const [user, setUser] = useState<RequestUser>({
     _id: "",
@@ -26,28 +24,30 @@ const UserPage = () => {
     phoneNumber: 0,
   });
 
-  const onSubmit = useCallback(async (user: RequestUser, id?: string) => {
-    console.log("id", id);
-    let response = {};
-    try {
-      if (id) {
-        response = await putUpdateUser(user, id);
-      } else response = await postUploadUser(user);
-      setReload(true);
-      setUser({
-        _id: "",
-        username: "",
-        email: "",
-        gender: "",
-        age: 0,
-        phoneNumber: 0,
-      });
-      setShowForm(false);
-      return response;
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+  const onSubmit = useCallback(
+    async (user: RequestUser, id?: string) => {
+      let response = {};
+      try {
+        if (id) {
+          response = await putUpdateUser(user, id);
+        } else response = await postUploadUser(user);
+        setReload(true);
+        setUser({
+          _id: "",
+          username: "",
+          email: "",
+          gender: "",
+          age: 0,
+          phoneNumber: 0,
+        });
+        setShowForm(false);
+        return response;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [setShowForm]
+  );
 
   const onDelete = useCallback(async (_id: string) => {
     try {
@@ -59,7 +59,7 @@ const UserPage = () => {
     }
   }, []);
 
-  const callGetUser = async () => {
+  const callGetUser = useCallback(async () => {
     try {
       const response = await getUser();
       setUsers(response.data.data);
@@ -68,10 +68,11 @@ const UserPage = () => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [setUsers]);
+
   useEffect(() => {
     callGetUser();
-  }, [reload]);
+  }, [callGetUser, reload]);
 
   return (
     <>

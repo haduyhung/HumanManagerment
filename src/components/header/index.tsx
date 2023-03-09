@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import HeaderWrapper from "./styled";
 import { useNavigate } from "react-router";
+import { Context } from "../../layouts/HomeLayout";
+
 interface itemLinkMenu {
   title: string;
   onActionLink?: () => any;
@@ -8,6 +10,8 @@ interface itemLinkMenu {
 }
 
 const Header = () => {
+  const { showForm, setShowForm, handleFocusRef, ref } = useContext(Context);
+
   const navigate = useNavigate();
   const listLinkMenu: itemLinkMenu[] = [
     {
@@ -38,7 +42,29 @@ const Header = () => {
           );
         })}
       </div>
-      <div className="menu-functions">{}</div>
+      <div className="menu-functions">
+        <div
+          style={{
+            visibility: showForm ? "hidden" : "visible",
+            backgroundColor: "white",
+            color: "brown",
+            width: "30px",
+            height: "30px",
+            display: "flex",
+            justifyContent: "center",
+            borderRadius: "50px",
+            fontSize: "20px",
+            cursor: "pointer",
+            marginLeft: "100px",
+          }}
+          onClick={() => {
+            setShowForm(true);
+            console.log("ref", ref);
+          }}
+        >
+          +
+        </div>
+      </div>
     </HeaderWrapper>
   );
 };

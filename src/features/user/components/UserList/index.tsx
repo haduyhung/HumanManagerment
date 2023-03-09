@@ -13,7 +13,7 @@ const UserList = (props: {
   setUser: React.Dispatch<React.SetStateAction<RequestUser>>;
   user: RequestUser;
 }) => {
-  const { setShowForm, showForm, users, setUser, onDelete } = props;
+  const { setShowForm, users, setUser, onDelete } = props;
 
   const columns: ColumnsType<User> = [
     {
@@ -96,22 +96,6 @@ const UserList = (props: {
   return (
     <UserListWrapper>
       <List {...{ data: users, columns: columns, pagination: false }} />
-      <button
-        onClick={() => {
-          setShowForm(!showForm);
-          setUser({
-            _id: "",
-            username: "",
-            email: "",
-            gender: "",
-            age: 0,
-            phoneNumber: 0,
-          });
-        }}
-        className="button-add-user"
-      >
-        {!showForm ? "add new user" : "close form"}
-      </button>
     </UserListWrapper>
   );
 };
