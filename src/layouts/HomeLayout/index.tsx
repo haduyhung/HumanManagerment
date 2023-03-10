@@ -19,7 +19,9 @@ const HomeLayout = () => {
   const ref = useRef(null);
   const [showForm, setShowForm] = useState<boolean>(false);
   const handleFocusRef = (ref: any) => {
-    ref.current.focus();
+    setTimeout(() => {
+      ref.current.focus();
+    }, 1);
   };
   const value = useMemo(
     () => ({ users, setUsers, showForm, setShowForm, ref, handleFocusRef }),

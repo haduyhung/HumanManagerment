@@ -1,7 +1,8 @@
 import { ColumnsType } from "antd/es/table";
 import { AxiosResponse } from "axios";
-import React from "react";
+import React, { useContext } from "react";
 import List from "../../../../components/list";
+import { Context } from "../../../../layouts/HomeLayout";
 import { RequestUser, User } from "../../../../types";
 import UserListWrapper from "./styled";
 
@@ -14,6 +15,8 @@ const UserList = (props: {
   user: RequestUser;
 }) => {
   const { setShowForm, users, setUser, onDelete } = props;
+
+  const { handleFocusRef, ref } = useContext(Context);
 
   const columns: ColumnsType<User> = [
     {
@@ -83,6 +86,7 @@ const UserList = (props: {
                 age: text.age,
                 phoneNumber: text.phoneNumber,
               });
+              handleFocusRef(ref);
             }}
           >
             Edit

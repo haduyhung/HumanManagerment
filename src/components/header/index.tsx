@@ -59,6 +59,7 @@ const Header = () => {
           }}
           onClick={() => {
             setShowForm(true);
+            handleFocusRef(ref);
             console.log("ref", ref);
           }}
         >

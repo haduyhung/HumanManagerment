@@ -1,5 +1,6 @@
 import { Input, InputNumber, Modal, Select } from "antd";
-import React from "react";
+import React, { useContext } from "react";
+import { Context } from "../../../../layouts/HomeLayout";
 import { RequestUser } from "../../../../types";
 import UserFormWrapper from "./styled";
 
@@ -9,9 +10,10 @@ const UserForm = (props: {
   onSubmit: (user: RequestUser, id?: string) => Promise<{} | undefined>;
   showForm: boolean;
   setShowForm: React.Dispatch<React.SetStateAction<boolean>>;
-  ref: any;
 }) => {
-  const { user, setUser, onSubmit, showForm, setShowForm, ref } = props;
+  const { user, setUser, onSubmit, showForm, setShowForm } = props;
+
+  const { ref } = useContext(Context);
 
   return (
     <Modal
