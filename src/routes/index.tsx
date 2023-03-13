@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter, RouteObject, useRoutes } from "react-router-dom";
+import {
+  BrowserRouter,
+  redirect,
+  RouteObject,
+  useRoutes,
+} from "react-router-dom";
 import CompanyPage from "../features/company/pages";
 import UserPage from "../features/user/pages";
 import HomeLayout from "../layouts/HomeLayout";

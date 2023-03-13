@@ -2,11 +2,13 @@ import React, { createContext, useMemo, useRef, useState } from "react";
 import Footer from "../../components/footer";
 import Header from "../../components/header";
 import HomeLayoutWrapper, { ContentWrapper } from "./styled";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 
 export const dataContext = {
   users: [],
   setUsers: (users: []) => {},
+  companies: [],
+  setCompanies: (companies: []) => {},
   showForm: false,
   setShowForm: (val: any) => {},
   ref: { current: null },
@@ -15,7 +17,10 @@ export const dataContext = {
 export const Context = createContext(dataContext);
 
 const HomeLayout = () => {
+  const location = useLocation();
+
   const [users, setUsers] = useState<[]>([]);
+  const [companies, setCompanies] = useState<[]>([]);
   const ref = useRef(null);
   const [showForm, setShowForm] = useState<boolean>(false);
   const handleFocusRef = (ref: any) => {
@@ -24,8 +29,17 @@ const HomeLayout = () => {
     }, 1);
   };
   const value = useMemo(
-    () => ({ users, setUsers, showForm, setShowForm, ref, handleFocusRef }),
-    [showForm, users]
+    () => ({
+      users,
+      setUsers,
+      companies,
+      setCompanies,
+      showForm,
+      setShowForm,
+      ref,
+      handleFocusRef,
+    }),
+    [companies, showForm, users]
   );
 
   return (
@@ -33,6 +47,7 @@ const HomeLayout = () => {
       <HomeLayoutWrapper>
         <Header />
         <ContentWrapper>
+          {location.pathname === "/" && <Navigate to={"/users"} replace />}
           <Outlet />
         </ContentWrapper>
         <Footer />

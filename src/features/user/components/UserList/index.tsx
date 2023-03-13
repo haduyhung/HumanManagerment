@@ -1,22 +1,31 @@
 import { ColumnsType } from "antd/es/table";
 import { AxiosResponse } from "axios";
-import React, { useContext } from "react";
+import React, { forwardRef, useContext, useImperativeHandle } from "react";
 import List from "../../../../components/list";
 import { Context } from "../../../../layouts/HomeLayout";
 import { RequestUser, User } from "../../../../types";
 import UserListWrapper from "./styled";
 
-const UserList = (props: {
-  setShowForm: React.Dispatch<React.SetStateAction<boolean>>;
-  showForm: boolean;
-  onDelete: (id: string) => Promise<AxiosResponse<any, any> | undefined>;
-  users: User[];
-  setUser: React.Dispatch<React.SetStateAction<RequestUser>>;
-  user: RequestUser;
-}) => {
+const UserList = (
+  props: {
+    setShowForm: React.Dispatch<React.SetStateAction<boolean>>;
+    showForm: boolean;
+    onDelete: (id: string) => Promise<AxiosResponse<any, any> | undefined>;
+    users: User[];
+    setUser: React.Dispatch<React.SetStateAction<RequestUser>>;
+    user: RequestUser;
+  },
+  testRef: any
+) => {
   const { setShowForm, users, setUser, onDelete } = props;
 
   const { handleFocusRef, ref } = useContext(Context);
+
+  const abc: string = "hehehe";
+
+  useImperativeHandle(testRef, () => {
+    return { alertHi: () => alert(`Hi: ${abc}`) };
+  });
 
   const columns: ColumnsType<User> = [
     {
@@ -61,6 +70,12 @@ const UserList = (props: {
       key: "role",
     },
     {
+      title: "Companies",
+      dataIndex: "companies",
+      key: "companies",
+      render: (text) => <div>{text}</div>,
+    },
+    {
       title: "Created at",
       dataIndex: "createdAt",
       key: "createdAt",
@@ -100,8 +115,9 @@ const UserList = (props: {
   return (
     <UserListWrapper>
       <List {...{ data: users, columns: columns, pagination: false }} />
+      <input ref={testRef} />
     </UserListWrapper>
   );
 };
 
-export default UserList;
+export default forwardRef(UserList);

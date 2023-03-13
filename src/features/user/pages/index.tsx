@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { Context } from "../../../layouts/HomeLayout";
 import {
   deleteUser,
@@ -14,6 +14,11 @@ import UserLayoutWrapper from "./styled";
 const UserPage = () => {
   const { users, setUsers, showForm, setShowForm } = useContext(Context);
   const [reload, setReload] = useState<boolean>(false);
+  const testRef = useRef();
+  const onFocusTestInput = (ref: any) => {
+    console.log("ref", ref);
+    ref.current.alertHi();
+  };
   const [user, setUser] = useState<RequestUser>({
     _id: "",
     username: "",
@@ -85,7 +90,9 @@ const UserPage = () => {
             user: user,
             onDelete: onDelete,
           }}
+          ref={testRef}
         />
+        <button onClick={() => onFocusTestInput(testRef)}>Test ref</button>
         <UserForm
           {...{
             user: user,

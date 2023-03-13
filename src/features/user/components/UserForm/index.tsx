@@ -1,4 +1,4 @@
-import { Input, InputNumber, Modal, Select } from "antd";
+import { Input, InputNumber, Modal, Select, Spin } from "antd";
 import React, { useContext } from "react";
 import { Context } from "../../../../layouts/HomeLayout";
 import { RequestUser } from "../../../../types";
@@ -19,7 +19,9 @@ const UserForm = (props: {
     <Modal
       title={user._id ? "Update an user" : "Create a new user"}
       open={showForm}
-      onOk={() => onSubmit(user, user._id)}
+      onOk={() => {
+        onSubmit(user, user._id);
+      }}
       okText={user._id ? "save" : "add"}
       onCancel={() => {
         setShowForm(false);
@@ -94,6 +96,16 @@ const UserForm = (props: {
             }
           />
         </div>
+        {/* <div className="field-item">
+          <div className="field-label">Companies:</div>
+          <Select
+            labelInValue
+            filterOption={false}
+            onSearch={debounceFetcher}
+            notFoundContent={fetching ? <Spin size="small" /> : null}
+            options={options}
+          />
+        </div> */}
       </UserFormWrapper>
     </Modal>
   );
