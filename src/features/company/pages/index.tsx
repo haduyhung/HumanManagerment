@@ -1,14 +1,99 @@
-import React from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
+import { Context } from "../../../layouts/HomeLayout";
+import {
+  deleteCompany,
+  getCompany,
+  postUploadCompany,
+  putUpdateCompany,
+} from "../../../sevices/company";
+import { RequestCompany } from "../../../types";
 import CompanyForm from "../components/CompanyForm";
 import CompanyList from "../components/CompanyList";
 import CompanyPageWrapper from "./styled";
 
 const CompanyPage = () => {
+  const { companies, setCompanies, showForm, setShowForm } =
+    useContext(Context);
+  const [reload, setReload] = useState<boolean>(false);
+  const [company, setCompany] = useState<RequestCompany>({
+    _id: "",
+    companyName: "",
+    email: "",
+    address: "",
+    phoneNumber: 0,
+  });
+
+  const onSubmit = useCallback(
+    async (company: RequestCompany, id?: string) => {
+      let response = {};
+      try {
+        if (id) {
+          response = await putUpdateCompany(company, id);
+        } else response = await postUploadCompany(company);
+        setReload(true);
+        setCompany({
+          _id: "",
+          companyName: "",
+          email: "",
+          address: "",
+          phoneNumber: 0,
+        });
+        setShowForm(false);
+        return response;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [setShowForm]
+  );
+
+  const onDelete = useCallback(async (_id: string) => {
+    try {
+      const response = await deleteCompany(_id);
+      setReload(true);
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  const callGetCompany = useCallback(async () => {
+    try {
+      const response = await getCompany();
+      setCompanies(response.data.data);
+      setReload(false);
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  }, [setCompanies]);
+
+  useEffect(() => {
+    callGetCompany();
+  }, [callGetCompany, reload]);
+
   return (
     <>
       <CompanyPageWrapper>
-        <CompanyForm />
-        <CompanyList />
+        <CompanyList
+          {...{
+            showForm: showForm,
+            setShowForm: setShowForm,
+            companies: companies,
+            setCompany: setCompany,
+            company: company,
+            onDelete: onDelete,
+          }}
+        />
+        <CompanyForm
+          {...{
+            company: company,
+            setCompany: setCompany,
+            onSubmit: onSubmit,
+            showForm: showForm,
+            setShowForm: setShowForm,
+          }}
+        />
       </CompanyPageWrapper>
     </>
   );

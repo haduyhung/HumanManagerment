@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from "axios";
 import { instance } from "../libraries/axios";
-import { Company } from "../types/company.type";
+import { RequestCompany } from "../types";
 
 export const getCompany = () => {
   const request: AxiosRequestConfig = {
@@ -10,7 +10,7 @@ export const getCompany = () => {
   return instance(request);
 };
 
-export const postUploadCompany = (data: Company) => {
+export const postUploadCompany = (data: RequestCompany) => {
   const request: AxiosRequestConfig = {
     method: "POST",
     url: `api/test-company/create`,
@@ -19,7 +19,7 @@ export const postUploadCompany = (data: Company) => {
   return instance(request);
 };
 
-export const putUpdateCompany = (data: Company, id: string) => {
+export const putUpdateCompany = (data: RequestCompany, id: string) => {
   const request: AxiosRequestConfig = {
     method: "PUT",
     url: `api/test-company/update/${id}`,
@@ -40,6 +40,15 @@ export const getCompanyById = (id: string) => {
   const request: AxiosRequestConfig = {
     method: "GET",
     url: `api/test-company/find-one/${id}`,
+  };
+  return instance(request);
+};
+
+export const getSearchById = (data: any) => {
+  const request: AxiosRequestConfig = {
+    method: "GET",
+    url: `api/test-company/search`,
+    data,
   };
   return instance(request);
 };

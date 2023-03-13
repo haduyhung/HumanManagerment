@@ -2,10 +2,19 @@ import { User } from "./index";
 
 export type Company = {
   readonly _id: string;
-  name: string;
+  companyName: string;
   email: string;
   address: string;
-  companies: Array<User>;
+  phoneNumber: number;
+  employees: Array<User>;
   createdAt: Date;
   updatedAt: Date;
+};
+
+export type RequestCompany = {
+  _id?: string;
+  companyName: string;
+  email: string;
+  address: string;
+  phoneNumber: number;
 };
