@@ -61,12 +61,12 @@ const CompanyPage = () => {
 
   const debounceSearch = async (data: string) => {
     const responce = await getSearch({ companyName: data });
-    console.log("responce", responce);
+    setCompanies(responce.data.data);
   };
 
   const onSearch = debounce((data: string) => {
     debounceSearch(data);
-  }, 150);
+  }, 250);
 
   const callGetCompany = useCallback(async () => {
     try {

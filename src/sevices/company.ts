@@ -48,7 +48,7 @@ export const getSearch = (data: any) => {
   const request: AxiosRequestConfig = {
     method: "GET",
     url: `api/test-company/search`,
-    data,
+    params: data,
   };
   return instance(request);
 };
