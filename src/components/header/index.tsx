@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import HeaderWrapper from "./styled";
 import { useNavigate } from "react-router";
 import { Context } from "../../layouts/HomeLayout";
+import SearchBox from "../search";
 
 interface itemLinkMenu {
   title: string;
@@ -43,19 +44,11 @@ const Header = () => {
         })}
       </div>
       <div className="menu-functions">
+        <SearchBox />
         <div
+          className="button-create"
           style={{
             visibility: showForm ? "hidden" : "visible",
-            backgroundColor: "white",
-            color: "brown",
-            width: "30px",
-            height: "30px",
-            display: "flex",
-            justifyContent: "center",
-            borderRadius: "50px",
-            fontSize: "20px",
-            cursor: "pointer",
-            marginLeft: "100px",
           }}
           onClick={() => {
             setShowForm(true);

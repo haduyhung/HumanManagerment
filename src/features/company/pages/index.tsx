@@ -5,9 +5,7 @@ import {
   getCompany,
   postUploadCompany,
   putUpdateCompany,
-  getSearch,
 } from "../../../sevices/company";
-import { debounce } from "lodash";
 import { RequestCompany } from "../../../types";
 import CompanyForm from "../components/CompanyForm";
 import CompanyList from "../components/CompanyList";
@@ -59,15 +57,6 @@ const CompanyPage = () => {
     }
   }, []);
 
-  const debounceSearch = async (data: string) => {
-    const responce = await getSearch({ companyName: data });
-    setCompanies(responce.data.data);
-  };
-
-  const onSearch = debounce((data: string) => {
-    debounceSearch(data);
-  }, 250);
-
   const callGetCompany = useCallback(async () => {
     try {
       const response = await getCompany();
@@ -86,13 +75,6 @@ const CompanyPage = () => {
   return (
     <>
       <CompanyPageWrapper>
-        <div className="search-wrapper">
-          <div className="search-label">Search:</div>
-          <input
-            className="search-input"
-            onChange={(val) => onSearch(val.target.value)}
-          />
-        </div>
         <CompanyList
           {...{
             showForm: showForm,
