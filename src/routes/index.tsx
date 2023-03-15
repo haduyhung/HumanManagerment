@@ -1,8 +1,11 @@
 import React from "react";
 import { BrowserRouter, RouteObject, useRoutes } from "react-router-dom";
+import LoginPage from "../features/auth/pages/LoginPage";
 import CompanyPage from "../features/company/pages";
 import UserPage from "../features/user/pages";
 import HomeLayout from "../layouts/HomeLayout";
+import PrivateRoutes from "./PrivateRoutes";
+import PublicRoutes from "./PublicRoutes";
 
 export const RouteRender = () => {
   const routesRoot: RouteObject[] = [
@@ -11,13 +14,28 @@ export const RouteRender = () => {
       element: <HomeLayout />,
       children: [
         {
-          path: "users",
-          element: <UserPage />,
+          element: <PublicRoutes />,
+          children: [
+            {
+              path: "login",
+              element: <LoginPage />,
+            },
+          ],
         },
         {
-          path: "companies",
-          element: <CompanyPage />,
+          element: <PrivateRoutes />,
+          children: [
+            {
+              path: "users",
+              element: <UserPage />,
+            },
+            {
+              path: "companies",
+              element: <CompanyPage />,
+            },
+          ],
         },
+
         {
           path: "*",
           element: <div>404 page! Làm đ j có trang này??</div>,

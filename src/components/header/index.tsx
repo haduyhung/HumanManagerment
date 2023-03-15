@@ -67,7 +67,6 @@ const Header = () => {
           onClick={() => {
             setShowForm(true);
             handleFocusRef(ref);
-            console.log("ref", ref);
           }}
         >
           <img src={icon.PlusIcon} alt="React Logo" width={18} height={18} />
