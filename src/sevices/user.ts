@@ -43,3 +43,12 @@ export const getUserById = (id: string) => {
   };
   return instance(request);
 };
+
+export const getSearchUser = (data: any) => {
+  const request: AxiosRequestConfig = {
+    method: "GET",
+    url: `api/test-user/search`,
+    params: data,
+  };
+  return instance(request);
+};

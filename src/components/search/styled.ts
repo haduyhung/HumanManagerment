@@ -5,7 +5,6 @@ const SeachBoxWrapper = styled.div`
   border: 1px solid black;
   border-radius: 20px;
   padding: 5px 10px;
-  margin-left: 60px;
   background-color: white;
   .search-label {
     font-size: 15px;

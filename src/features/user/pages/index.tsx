@@ -1,7 +1,10 @@
+import { debounce } from "lodash";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { Context } from "../../../layouts/HomeLayout";
+import { getSearchCompany } from "../../../sevices/company";
 import {
   deleteUser,
+  getSearchUser,
   getUser,
   postUploadUser,
   putUpdateUser,
@@ -12,7 +15,8 @@ import UserList from "../components/UserList";
 import UserLayoutWrapper from "./styled";
 
 const UserPage = () => {
-  const { users, setUsers, showForm, setShowForm } = useContext(Context);
+  const { users, setUsers, showForm, setShowForm, searchInput } =
+    useContext(Context);
   const [reload, setReload] = useState<boolean>(false);
   const testRef = useRef();
   const onFocusTestInput = (ref: any) => {
@@ -52,6 +56,15 @@ const UserPage = () => {
     },
     [setShowForm]
   );
+
+  const debounceSearch = async (data: string) => {
+    const response = await getSearchUser({ data: data });
+    setUsers(response.data.data);
+  };
+
+  debounce(() => {
+    debounceSearch(searchInput);
+  }, 250);
 
   const onDelete = useCallback(async (_id: string) => {
     try {

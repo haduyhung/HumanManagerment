@@ -5,6 +5,8 @@ import HomeLayoutWrapper, { ContentWrapper } from "./styled";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 
 export const dataContext = {
+  searchInput: "",
+  setSearchInput: (data: string) => {},
   users: [],
   setUsers: (users: []) => {},
   companies: [],
@@ -19,6 +21,7 @@ export const Context = createContext(dataContext);
 const HomeLayout = () => {
   const location = useLocation();
 
+  const [searchInput, setSearchInput] = useState<string>("");
   const [users, setUsers] = useState<[]>([]);
   const [companies, setCompanies] = useState<[]>([]);
   const ref = useRef(null);
@@ -30,6 +33,8 @@ const HomeLayout = () => {
   };
   const value = useMemo(
     () => ({
+      searchInput,
+      setSearchInput,
       users,
       setUsers,
       companies,
@@ -39,7 +44,7 @@ const HomeLayout = () => {
       ref,
       handleFocusRef,
     }),
-    [companies, showForm, users]
+    [companies, searchInput, showForm, users]
   );
 
   return (

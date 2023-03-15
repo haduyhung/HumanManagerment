@@ -3,6 +3,7 @@ import HeaderWrapper from "./styled";
 import { useNavigate } from "react-router";
 import { Context } from "../../layouts/HomeLayout";
 import SearchBox from "../search";
+import * as icon from "../../assets/icons";
 
 interface itemLinkMenu {
   title: string;
@@ -45,8 +46,21 @@ const Header = () => {
       </div>
       <div className="menu-functions">
         <SearchBox />
+        {/* <div className="function-search">
+          <div className="search-logo">
+            <img
+              src={icon.SearchIcon}
+              alt="React Logo"
+              width={18}
+              height={18}
+            />
+          </div>
+          <div className="search-box-wrapper">
+            <SearchBox />
+          </div>
+        </div> */}
         <div
-          className="button-create"
+          className="menu-functions-button"
           style={{
             visibility: showForm ? "hidden" : "visible",
           }}
@@ -56,7 +70,7 @@ const Header = () => {
             console.log("ref", ref);
           }}
         >
-          +
+          <img src={icon.PlusIcon} alt="React Logo" width={18} height={18} />
         </div>
       </div>
     </HeaderWrapper>

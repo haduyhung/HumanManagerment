@@ -30,18 +30,44 @@ const HeaderWrapper = styled.div`
     }
   }
   .menu-functions {
+    margin-left: 60px;
     display: flex;
-    .button-create {
+    .menu-functions-button {
       background-color: white;
       color: brown;
       width: 30px;
       height: 30px;
       display: flex;
+      align-items: center;
       justify-content: center;
+      border: 1px black solid;
       border-radius: 50px;
-      font-size: 20px;
       cursor: pointer;
       margin-left: 5px;
+    }
+    .function-search {
+      .search-logo {
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid black;
+        border-radius: 20px;
+        background-color: white;
+        cursor: pointer;
+      }
+      .search-box-wrapper {
+        display: none;
+      }
+      :hover {
+        .search-logo {
+          display: none;
+        }
+        .search-box-wrapper {
+          display: inline;
+        }
+      }
     }
   }
 `;
