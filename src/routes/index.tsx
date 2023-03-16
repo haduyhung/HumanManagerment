@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, RouteObject, useRoutes } from "react-router-dom";
 import LoginPage from "../features/auth/pages/LoginPage";
+import ProfilePage from "../features/auth/pages/ProfilePage";
 import CompanyPage from "../features/company/pages";
 import UserPage from "../features/user/pages";
 import HomeLayout from "../layouts/HomeLayout";
@@ -32,6 +33,10 @@ export const RouteRender = () => {
             {
               path: "companies",
               element: <CompanyPage />,
+            },
+            {
+              path: "profile",
+              element: <ProfilePage />,
             },
           ],
         },

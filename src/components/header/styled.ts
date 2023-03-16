@@ -70,6 +70,16 @@ const HeaderWrapper = styled.div`
       }
     }
   }
+  .menu-user-profile {
+    cursor: pointer;
+    margin-left: 30px;
+    font-size: 20px;
+    font-weight: 700;
+    .link-username {
+      color: pink;
+      font-style: italic;
+    }
+  }
 `;
 
 export default HeaderWrapper;

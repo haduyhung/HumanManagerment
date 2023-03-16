@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import { Context } from "../../layouts/HomeLayout";
 import SearchBox from "../search";
 import * as icon from "../../assets/icons";
+import { Link } from "react-router-dom";
 
 interface itemLinkMenu {
   title: string;
@@ -13,6 +14,9 @@ interface itemLinkMenu {
 
 const Header = () => {
   const { showForm, setShowForm, handleFocusRef, ref } = useContext(Context);
+
+  const a = localStorage.getItem("userInfo");
+  const userInfo = a && JSON.parse(a);
 
   const navigate = useNavigate();
   const listLinkMenu: itemLinkMenu[] = [
@@ -72,6 +76,15 @@ const Header = () => {
           <img src={icon.PlusIcon} alt="React Logo" width={18} height={18} />
         </div>
       </div>
+      {userInfo && (
+        <div className="menu-user-profile">
+          Xin chào{" "}
+          <Link className="link-username" to={"profile"}>
+            {userInfo.username}
+          </Link>{" "}
+          !
+        </div>
+      )}
     </HeaderWrapper>
   );
 };

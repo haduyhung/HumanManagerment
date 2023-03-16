@@ -1,11 +1,23 @@
 import { Button, Input } from "antd";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { login } from "../../../../sevices/auth";
 import LoginWrapper from "./styled";
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+
   const [userInfo, setUserInfo] = useState<any>({});
-  const onLogin = () => {
-    console.log("userInfo", userInfo);
+  const onLogin = async () => {
+    let response: any;
+    try {
+      response = await login(userInfo);
+      localStorage.setItem("token", JSON.stringify(response.data.token));
+      localStorage.setItem("userInfo", JSON.stringify(response.data.userInfo));
+      navigate("/users");
+    } catch (error) {
+      console.log("error", error);
+    }
   };
 
   return (
