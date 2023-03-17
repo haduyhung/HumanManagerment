@@ -46,30 +46,6 @@ const HeaderWrapper = styled.div`
       margin-left: 5px;
       box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     }
-    .function-search {
-      .search-logo {
-        width: 30px;
-        height: 30px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid black;
-        border-radius: 20px;
-        background-color: white;
-        cursor: pointer;
-      }
-      .search-box-wrapper {
-        display: none;
-      }
-      :hover {
-        .search-logo {
-          display: none;
-        }
-        .search-box-wrapper {
-          display: inline;
-        }
-      }
-    }
     .image-profile {
       object-fit: cover;
       width: 30px;

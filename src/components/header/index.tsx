@@ -4,7 +4,6 @@ import { useNavigate } from "react-router";
 import { Context } from "../../layouts/HomeLayout";
 import SearchBox from "../search";
 import * as icon from "../../assets/icons";
-import { Link } from "react-router-dom";
 
 interface itemLinkMenu {
   title: string;
@@ -52,19 +51,6 @@ const Header = () => {
         <>
           <div className="menu-functions">
             <SearchBox />
-            {/* <div className="function-search">
-          <div className="search-logo">
-            <img
-              src={icon.SearchIcon}
-              alt="React Logo"
-              width={18}
-              height={18}
-            />
-          </div>
-          <div className="search-box-wrapper">
-            <SearchBox />
-          </div>
-        </div> */}
             <div
               className="menu-functions-button"
               style={{
