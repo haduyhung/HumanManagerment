@@ -23,6 +23,7 @@ const LoginPage = () => {
   return (
     <LoginWrapper>
       <div className="fields-container">
+        <div className="login-label">Đăng Nhập</div>
         <div className="field-item">
           <div className="field-label">Email/Phone Number:</div>
           <Input
@@ -36,7 +37,7 @@ const LoginPage = () => {
         </div>
         <div className="field-item">
           <div className="field-label">Password:</div>
-          <Input
+          <Input.Password
             className="input-field"
             placeholder="Enter your password"
             value={userInfo.password}

@@ -5,8 +5,8 @@ import ProfilePage from "../features/auth/pages/ProfilePage";
 import CompanyPage from "../features/company/pages";
 import UserPage from "../features/user/pages";
 import HomeLayout from "../layouts/HomeLayout";
-import PrivateRoutes from "./PrivateRoutes";
-import PublicRoutes from "./PublicRoutes";
+import PrivateRoutes from "./privateRoutes";
+import PublicRoutes from "./publicRoutes";
 
 export const RouteRender = () => {
   const routesRoot: RouteObject[] = [

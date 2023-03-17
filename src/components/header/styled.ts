@@ -1,17 +1,17 @@
 import styled from "styled-components";
 
 const HeaderWrapper = styled.div`
-  background-color: brown;
   position: fixed;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: row;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   .logo {
     font-size: 30px;
     margin-right: 100px;
-    color: whitesmoke;
+    color: brown;
   }
   .menu-list {
     display: flex;
@@ -40,10 +40,11 @@ const HeaderWrapper = styled.div`
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 1px black solid;
+      border: 0.5px gray solid;
       border-radius: 50px;
       cursor: pointer;
       margin-left: 5px;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     }
     .function-search {
       .search-logo {
@@ -69,15 +70,11 @@ const HeaderWrapper = styled.div`
         }
       }
     }
-  }
-  .menu-user-profile {
-    cursor: pointer;
-    margin-left: 30px;
-    font-size: 20px;
-    font-weight: 700;
-    .link-username {
-      color: pink;
-      font-style: italic;
+    .image-profile {
+      object-fit: cover;
+      width: 30px;
+      height: 30px;
+      border-radius: 20px;
     }
   }
 `;

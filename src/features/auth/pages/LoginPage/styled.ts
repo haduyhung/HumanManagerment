@@ -10,6 +10,12 @@ const LoginWrapper = styled.div`
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     border-radius: 20px;
     padding: 20px;
+    .login-label {
+      font-size: 28px;
+      margin-bottom: 15px;
+      color: brown;
+      font-weight: 600;
+    }
     .field-item {
       display: flex;
       margin-bottom: 10px;
@@ -20,11 +26,29 @@ const LoginWrapper = styled.div`
       }
       .input-field {
       }
+      .ant-input:focus {
+        border-color: brown;
+      }
+      .ant-input:hover {
+        border-color: brown;
+      }
+      .ant-input-password {
+      }
+      .ant-input-password:focus {
+        border-color: brown;
+      }
+      .ant-input-password:hover {
+        border-color: brown;
+      }
     }
     .field-line {
-      border: 0.5px solid black;
+      border: 0.25px solid brown;
       margin-top: 15px;
       margin-bottom: 10px;
+    }
+    .ant-btn:hover {
+      color: brown;
+      border: 1px solid brown;
     }
   }
 `;

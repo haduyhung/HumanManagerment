@@ -48,9 +48,11 @@ const Header = () => {
           );
         })}
       </div>
-      <div className="menu-functions">
-        <SearchBox />
-        {/* <div className="function-search">
+      {userInfo && (
+        <>
+          <div className="menu-functions">
+            <SearchBox />
+            {/* <div className="function-search">
           <div className="search-logo">
             <img
               src={icon.SearchIcon}
@@ -63,27 +65,37 @@ const Header = () => {
             <SearchBox />
           </div>
         </div> */}
-        <div
-          className="menu-functions-button"
-          style={{
-            visibility: showForm ? "hidden" : "visible",
-          }}
-          onClick={() => {
-            setShowForm(true);
-            handleFocusRef(ref);
-          }}
-        >
-          <img src={icon.PlusIcon} alt="React Logo" width={18} height={18} />
-        </div>
-      </div>
-      {userInfo && (
-        <div className="menu-user-profile">
-          Xin chào{" "}
-          <Link className="link-username" to={"profile"}>
-            {userInfo.username}
-          </Link>{" "}
-          !
-        </div>
+            <div
+              className="menu-functions-button"
+              style={{
+                visibility: showForm ? "hidden" : "visible",
+              }}
+              onClick={() => {
+                setShowForm(true);
+                handleFocusRef(ref);
+              }}
+            >
+              <img
+                src={icon.PlusIcon}
+                alt="React Logo"
+                width={18}
+                height={18}
+              />
+            </div>
+            <div
+              className="menu-functions-button"
+              onClick={() => navigate("profile")}
+            >
+              <img
+                className="image-profile"
+                alt={userInfo.username}
+                src={userInfo.avatar}
+                width={30}
+                height={30}
+              />
+            </div>
+          </div>
+        </>
       )}
     </HeaderWrapper>
   );
