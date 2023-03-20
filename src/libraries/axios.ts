@@ -4,7 +4,8 @@ import { getLoggedUserInfo } from "..//utils/token.util";
 //const baseURL = process.env.REACT_APP_API_URL as string;
 
 export const instance = axios.create({
-  baseURL: "http://localhost:3001",
+  baseURL:
+    "https://the-new-booking-movie-ticket-back-85rgmq3zo-haduyhung.vercel.app/",
   //baseURL: "https://thenewbookingmovieticketback-production.up.railway.app/",
 });
 

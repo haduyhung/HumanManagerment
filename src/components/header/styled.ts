@@ -40,7 +40,7 @@ const HeaderWrapper = styled.div`
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 0.5px gray solid;
+      border: 1px gray solid;
       border-radius: 50px;
       cursor: pointer;
       margin-left: 5px;

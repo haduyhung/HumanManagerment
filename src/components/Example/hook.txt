@@ -1,0 +1,79 @@
+// import { useAppDispatch } from "@app/store";
+// import { useState } from "react";
+// import { useForm } from "react-hook-form";
+// import { useSelector } from "react-redux";
+// import { useLocation, useNavigate } from "react-router-dom";
+// import { ArrayProducts } from "types/productDetail";
+// import { dataProduct, dataProductItem, dataTableDefault, getSendOrder } from "./slice";
+
+// export type ReceivedProps = Record<string, any>;
+
+// const useLogin = (props: ReceivedProps) => {
+//   const [showConfirm, setShowConfirm] = useState(false);
+//   const methods = useForm(); // react hoook form
+//   const params = useLocation();
+//   const dataParams: any = params.state;
+//   const dataProductItemRedux = useSelector(dataProductItem);
+//   const dataProductRedux = useSelector(dataProduct);
+//   const dataTableDefaults = useSelector(dataTableDefault);
+//   const dispatch = useAppDispatch();
+//   const navigate = useNavigate();
+
+//   const handleSubmitOrder = () => {
+//     setShowConfirm(true);
+//   };
+//   const onSubmitDetail = () => {
+//     const data: any = [];
+
+//     dataProductRedux
+//       ? dataProductRedux.quantity === 0
+//         ? ""
+//         : data.push({
+//             contractKbn: "",
+//             productName: dataProductRedux.machines[0].kataName,
+//             productCd: `${dataProductRedux.machines[Number(dataTableDefaults.key) - 1].kishuCd}${
+//               dataProductRedux.machines[Number(dataTableDefaults.key) - 1].seinoCd
+//             }${dataProductRedux.machines[Number(dataTableDefaults.key) - 1].kataCd}`,
+//             controlNum: "",
+//             quantity: dataProductRedux.quantity,
+//             useTs: "",
+//             puckupTs: "",
+//             detailedNote: dataProductRedux.messager,
+//           })
+//       : "";
+//     dataProductItemRedux
+//       ? dataProductItemRedux.data.map((item: any) => {
+//           item.products.map((vl: ArrayProducts) => {
+//             vl?.quantity
+//               ? data.push({
+//                   contractKbn: "",
+//                   productName: vl.name,
+//                   productCd: vl.productCd,
+//                   controlNum: "",
+//                   quantity: vl.quantity,
+//                   useTs: "",
+//                   puckupTs: "",
+//                   detailedNote: "",
+//                 })
+//               : "";
+//           });
+//         })
+//       : "";
+//     dispatch(getSendOrder(data));
+//     navigate(`/function/order-input`);
+//   };
+
+//   return {
+//     ...props,
+//     handleSubmitOrder,
+//     showConfirm,
+//     setShowConfirm,
+//     methods,
+//     dataParams,
+//     onSubmitDetail,
+//   };
+// };
+
+// export type Props = ReturnType<typeof useLogin>;
+
+// export default useLogin;

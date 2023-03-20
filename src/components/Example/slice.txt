@@ -1,0 +1,193 @@
+// import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
+// import { RootState } from "app/store";
+// import {
+//   DetailAssistReponse,
+//   DetailProduct,
+//   DetailProductItem,
+//   DetailProductTable,
+// } from "types/productDetail";
+
+// type InitialState = {
+//   dataProduct: DetailProduct;
+//   dataProductItem: DetailProductItem;
+//   tableDefault: DetailProductTable;
+//   detailAssist: DetailAssistReponse;
+//   sendOrder: [];
+// };
+
+// const initialState: InitialState = {
+//   dataProduct: {
+//     description: "",
+//     imageUrl: [],
+//     machines: [
+//       {
+//         basicPrice: 0,
+//         categoryCd: "",
+//         kataCd: "",
+//         kataName: "",
+//         kishuCd: "",
+//         seinoCd: "",
+//         standardPrice: 0,
+//         messager: "",
+//       },
+//     ],
+//     messager: "",
+//     quantity: 0,
+//   },
+//   dataProductItem: {
+//     data: [
+//       {
+//         description: "",
+//         groupCd: "",
+//         groupName: "",
+//         imgUrl: "",
+//         index: 0,
+//         itemName: "",
+//         products: [
+//           {
+//             imgUrl: "",
+//             name: "",
+//             price: 0,
+//             productCd: "",
+//             quantity: 0,
+//           },
+//         ],
+//         checkked: false,
+//         messager: "",
+//       },
+//     ],
+//   },
+//   tableDefault: {
+//     key: "",
+//     id: "",
+//     gropname: "",
+//   },
+//   detailAssist: {
+//     data: [
+//       {
+//         groupCd: "",
+//         questionContent: "",
+//         notes: "",
+//         answerMethod: "",
+//         answerContent: "",
+//         answerInitvaliue: "",
+//         kisekaConversionFlg: 0,
+//         image_file: "",
+//         imageUrls: [],
+//         answer: "",
+//         index: 0,
+//       },
+//     ],
+//   },
+//   sendOrder: [],
+// };
+
+// const productDetailSlice = createSlice({
+//   name: "detail",
+//   initialState,
+//   reducers: {
+//     getDetailProduct(state, action: PayloadAction<any>) {
+//       state.dataProduct = action.payload;
+//     },
+//     setProductItemCurrent(
+//       state,
+//       action: PayloadAction<{ value: any; currents: any }>
+//     ) {
+//       const { value, currents } = action.payload;
+//       state.dataProductItem.data[currents] = value;
+//     },
+//     getDetailProductItem(state, action: PayloadAction<any>) {
+//       state.dataProductItem = action.payload;
+//     },
+//     setProductquantity(state, action: PayloadAction<any>) {
+//       state.dataProduct.quantity = action.payload;
+//     },
+//     setProductMessager(state, action: PayloadAction<any>) {
+//       state.dataProduct.messager = action.payload;
+//     },
+//     setProductItemQuantity(
+//       state,
+//       action: PayloadAction<{ value: any; currents: any; index: any }>
+//     ) {
+//       const { value, currents, index } = action.payload;
+//       state.dataProductItem.data[currents].products[index - 1].quantity = value;
+//     },
+//     setProductItemMesager(
+//       state,
+//       action: PayloadAction<{ value: any; currents: any }>
+//     ) {
+//       const { value, currents } = action.payload;
+//       state.dataProductItem.data[currents].messager = value;
+//     },
+//     setProductImageUrl(state, action: PayloadAction<[]>) {
+//       state.dataProduct.imageUrl = action.payload;
+//     },
+//     setTableDefault(state, action: PayloadAction<any>) {
+//       state.tableDefault = action.payload;
+//     },
+//     setKeyTableDefault(state, action: PayloadAction<any>) {
+//       state.tableDefault.key = action.payload;
+//     },
+//     getDetailAssist(state, action: PayloadAction<any>) {
+//       state.detailAssist = action.payload;
+//     },
+//     setDetailAssistAnswer(
+//       state,
+//       action: PayloadAction<{ value: any; currents: number }>
+//     ) {
+//       const { value, currents } = action.payload;
+//       state.detailAssist.data[currents].answer = value;
+//     },
+//     setDetailAssistInput(
+//       state,
+//       action: PayloadAction<{ value: any; currents: number; index: number }>
+//     ) {
+//       const { value, currents, index } = action.payload;
+//       state.detailAssist.data[currents].answer[index] = value;
+//     },
+//     getSendOrder(state, action: PayloadAction<[]>) {
+//       state.sendOrder = action.payload;
+//     },
+//   },
+// });
+
+// export const {
+//   getDetailProduct,
+//   setProductItemCurrent,
+//   getDetailProductItem,
+//   setProductquantity,
+//   setProductMessager,
+//   setProductItemQuantity,
+//   setProductItemMesager,
+//   setProductImageUrl,
+//   setTableDefault,
+//   getDetailAssist,
+//   setDetailAssistAnswer,
+//   setDetailAssistInput,
+//   setKeyTableDefault,
+//   getSendOrder,
+// } = productDetailSlice.actions;
+
+// const selectAuthState = (state: RootState) => state.detail;
+// export const dataProduct = createSelector(
+//   selectAuthState,
+//   (detail) => detail.dataProduct
+// );
+// export const dataProductItem = createSelector(
+//   selectAuthState,
+//   (detail) => detail.dataProductItem
+// );
+// export const dataTableDefault = createSelector(
+//   selectAuthState,
+//   (detail) => detail.tableDefault
+// );
+// export const dataDetailAssist = createSelector(
+//   selectAuthState,
+//   (detail) => detail.detailAssist
+// );
+// export const dataSendOrder = createSelector(
+//   selectAuthState,
+//   (detail) => detail.sendOrder
+// );
+
+// export default productDetailSlice;

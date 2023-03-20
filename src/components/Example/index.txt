@@ -1,0 +1,97 @@
+// import { FC } from "react";
+// import useSelect, { Props, ReceivedProps } from "./hook";
+// import ProductSelectWrapper from "./styled";
+// import Slider from "@features/product/components/Slider";
+// import Information from "@features/product/components/ProductInformation";
+// import Option from "@features/product/components/ProductOption";
+// import FooterWrapper from "@components/FooterWrapper";
+// import Button from "@components/Button";
+// import { useNavigate } from "react-router-dom";
+// import Modal from "@components/Modal";
+// import { FormProvider } from "react-hook-form";
+
+// const ProductSelectLayout: FC<Props> = ({
+//   showConfirm,
+//   setShowConfirm,
+//   handleSubmitOrder,
+//   methods,
+//   dataParams,
+//   onSubmitDetail,
+// }) => {
+//   const navigate = useNavigate();
+
+//   return (
+//     <ProductSelectWrapper>
+//       <FormProvider {...methods}>
+//         <div className="product-content">
+//           <div className="product-information-warpper">
+//             <Slider />
+//             <Information dataParam={dataParams} />
+//           </div>
+//           <Option control={methods.control} />
+//         </div>
+//         <FooterWrapper
+//           contentLeft={
+//             <>
+//               <Button
+//                 color="black"
+//                 className="footer-button"
+//                 style={{ marginRight: "64px" }}
+//                 minWidth={133}
+//                 onClick={() => navigate(-1)}
+//               >
+//                 戻る
+//               </Button>
+//             </>
+//           }
+//           contentRight={
+//             <>
+//               <Button
+//                 color="primary"
+//                 minWidth={133}
+//                 onClick={methods.handleSubmit(handleSubmitOrder)}
+//                 className="footer-button"
+//               >
+//                 確定
+//               </Button>
+//               {/* Modal show message */}
+//               <Modal closeIcon={false} isShowing={showConfirm}>
+//                 <div style={{ width: 634, height: 240, padding: "30px", textAlign: "center" }}>
+//                   <div
+//                     style={{
+//                       justifyContent: "center",
+//                       alignItems: "center",
+//                       display: "flex",
+//                       width: "100%",
+//                     }}
+//                   >
+//                     <p
+//                       style={{
+//                         width: 350,
+//                         textAlign: "center",
+//                         fontSize: 20,
+//                         marginBottom: 40,
+//                       }}
+//                     >
+//                       未選択の付属品・販売品があります。 確定してよろしいですか？
+//                     </p>
+//                   </div>
+//                   <Button className="style-button" color="gray" onClick={() => setShowConfirm(false)}>
+//                     キャンセル
+//                   </Button>
+//                   <Button onClick={() => onSubmitDetail()} className="style-button" color="primary">
+//                     確定
+//                   </Button>
+//                 </div>
+//               </Modal>
+//             </>
+//           }
+//         />
+//       </FormProvider>
+//     </ProductSelectWrapper>
+//   );
+// };
+
+// const ProductSelect: FC<ReceivedProps> = (props) => <ProductSelectLayout {...useSelect(props)} />;
+
+// export default ProductSelect;

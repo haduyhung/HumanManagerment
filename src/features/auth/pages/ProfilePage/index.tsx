@@ -1,9 +1,11 @@
 import { Button } from "antd";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ProfileWrapper from "./styled";
 
 const ProfilePage = () => {
   const [userProfile, setUserProfile] = useState<any>();
+  const navigate = useNavigate();
   const getProfileUser = () => {
     let userInfo = localStorage.getItem("userInfo");
     if (userInfo) {
@@ -12,6 +14,7 @@ const ProfilePage = () => {
   };
   const logout = () => {
     localStorage.clear();
+    navigate("/");
   };
   useEffect(() => {
     getProfileUser();
