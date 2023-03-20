@@ -3,6 +3,7 @@ import { Context } from "../../../layouts/HomeLayout";
 import {
   deleteCompany,
   getCompany,
+  getSearchCompany,
   postUploadCompany,
   putUpdateCompany,
 } from "../../../sevices/company";
@@ -12,7 +13,7 @@ import CompanyList from "../components/CompanyList";
 import CompanyPageWrapper from "./styled";
 
 const CompanyPage = () => {
-  const { companies, setCompanies, showForm, setShowForm } =
+  const { companies, setCompanies, showForm, setShowForm, searchInput } =
     useContext(Context);
   const [reload, setReload] = useState<boolean>(false);
   const [company, setCompany] = useState<RequestCompany>({
@@ -56,6 +57,19 @@ const CompanyPage = () => {
       console.log(error);
     }
   }, []);
+
+  const onSearch = useCallback(
+    async (data: string) => {
+      let response: any;
+      response = await getSearchCompany({ data: data });
+      setCompanies(response.data.data);
+    },
+    [setCompanies]
+  );
+
+  useEffect(() => {
+    onSearch(searchInput);
+  }, [onSearch, searchInput]);
 
   const callGetCompany = useCallback(async () => {
     try {

@@ -1,7 +1,5 @@
-import { debounce } from "lodash";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { Context } from "../../../layouts/HomeLayout";
-import { getSearchCompany } from "../../../sevices/company";
 import {
   deleteUser,
   getSearchUser,
@@ -57,15 +55,6 @@ const UserPage = () => {
     [setShowForm]
   );
 
-  const debounceSearch = async (data: string) => {
-    const response = await getSearchUser({ data: data });
-    setUsers(response.data.data);
-  };
-
-  debounce(() => {
-    debounceSearch(searchInput);
-  }, 250);
-
   const onDelete = useCallback(async (_id: string) => {
     try {
       const response = await deleteUser(_id);
@@ -75,6 +64,19 @@ const UserPage = () => {
       console.log(error);
     }
   }, []);
+
+  const onSearch = useCallback(
+    async (data: string) => {
+      let response: any;
+      response = await getSearchUser({ data: data });
+      setUsers(response.data.data);
+    },
+    [setUsers]
+  );
+
+  useEffect(() => {
+    onSearch(searchInput);
+  }, [onSearch, searchInput]);
 
   const callGetUser = useCallback(async () => {
     try {

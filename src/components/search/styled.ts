@@ -32,6 +32,7 @@ const SeachBoxWrapper = styled.div`
     display: block;
     border: none;
     outline: none;
+    margin-right: 5px;
   }
 `;
 
